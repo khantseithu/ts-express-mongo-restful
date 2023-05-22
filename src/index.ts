@@ -6,9 +6,9 @@ import compression from 'compression';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import router from './routes';
+import router from './router';
 
-const PORT = 8080;
+const PORT = 3000;
 
 dotenv.config();
 
@@ -24,11 +24,9 @@ app.use(cookieParser());
 app.use(compression());
 app.use(bodyParser.json());
 
-// const server = http.createServer(app);
-
-const server = app.listen(PORT, '0.0.0.0', () => {
-  const { address, port } = server.address() as any;
-  console.log(`Server is running and accessible at http://${address}:${PORT}`);
+const server = http.createServer(app);
+server.listen(PORT, () => {
+  console.log(`Server running on ${PORT}`);
 });
 
 mongoose.Promise = Promise;
